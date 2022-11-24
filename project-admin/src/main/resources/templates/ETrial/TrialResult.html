@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+</body>
+    <script th:inline="javascript">
+          var maxNumber = [[${maxNumber}]]
+          var trialNum = [[${trialNum}]]
+        	  
+     if(trialNum == maxNumber){
+    	 location.href="myPage";
+     }else{
+       location.href="EtrialRead?trialNum=[[${trialNum+1}]]";
+     }
+    </script>
+</html>

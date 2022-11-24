@@ -1,0 +1,252 @@
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+section.notice {
+  padding: 80px 0;
+}
+
+
+
+.page-title {
+  margin-bottom: 60px;
+}
+.page-title h3 {
+  font-size: 28px;
+  color: #333333;
+  font-weight: 400;
+  text-align: center;
+}
+
+#board-search .search-window {
+  padding: 15px 0;
+  background-color: #f9f7f9;
+}
+#board-search .search-window .search-wrap {
+  position: relative;
+/*   padding-right: 124px; */
+  margin: 0 auto;
+  width: 80%;
+  max-width: 564px;
+}
+#board-search .search-window .search-wrap input {
+  height: 40px;
+  width: 100%;
+  font-size: 14px;
+  padding: 7px 14px;
+  border: 1px solid #ccc;
+}
+#board-search .search-window .search-wrap input:focus {
+  border-color: #333;
+  outline: 0;
+  border-width: 1px;
+}
+#board-search .search-window .search-wrap .btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 108px;
+  padding: 0;
+  font-size: 16px;
+}
+
+.board-table {
+  font-size: 13px;
+  width: 100%;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+.board-table a {
+  color: #333;
+  display: inline-block;
+  line-height: 1.4;
+  word-break: break-all;
+  vertical-align: middle;
+}
+
+
+.btn {
+  display: inline-block;
+  padding: 0 30px;
+  font-size: 15px;
+  font-weight: 400;
+  background: transparent;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn-dark {
+  background: #555;
+  color: #fff;
+}
+
+.btn-dark:hover, .btn-dark:focus {
+  background: #373737;
+  border-color: #373737;
+  color: #fff;
+}
+
+.btn-dark {
+  background: #555;
+  color: #fff;
+}
+
+.btn-dark:hover, .btn-dark:focus {
+  background: #373737;
+  border-color: #373737;
+  color: #fff;
+}
+* {
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.container {
+	width: 1353px;
+	margin-top: 129px;
+}
+.blind {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  margin: -1px;
+  width: 1px;
+  height: 1px;
+}
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	border: none;
+	overflow: auto;
+}
+
+/* [body 스크롤바 메인 스타일 지정] */
+body::-webkit-scrollbar {
+	width: 10px;
+	background-color: #c1c1c1;
+}
+/* body 스크롤바 thumb 스타일 지정 */
+body::-webkit-scrollbar-thumb {
+	background-color: #444444;
+}
+
+.page-title h3 {
+	margin-top: 138px;
+	margin-bottom: 110px;
+	font-size: 50px;
+	color: white;
+	font-weight: bold /* 	text-align center; */
+}
+
+.container {
+	width: 1353px;
+	margin-top: 129px;
+}
+
+.board-table {
+	font-size: 16px;
+	height: 277px;
+	background: white;
+	box-sizing: border-box;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 15px;
+}
+
+
+.board-table .th-num {
+    width: 203px;
+    text-align: center;
+}
+
+/* .board-table th, .board-table td {
+    padding: 14px 0;
+    width: 162px
+    !important;
+} */
+
+.page {
+	font-weight: bold;
+	font-size: 20px;
+	color: white;
+}
+
+/* .btn1 {
+	width: -27px;
+	height: 31px;
+	border-radius: 6px;
+	padding: 5px;
+	font-weight: bold;
+	margin-top:-22px;
+	float: right;
+	color: #938888;
+} */
+
+.btn1 {
+	width: -27px;
+	height: 33px;
+	border-radius: 6px;
+	padding: 5px;
+	font-weight: normal;
+	margin-top: -22px;
+	float: right;
+	border: none;
+	font-size: 0.875rem;
+}
+
+nav {
+	margin-top: 5px;
+}
+
+.page-item.active .page-link {
+	z-index: 3;
+	color: #fff;
+	background-color: #fff;
+	border-color: #ccc;;
+	border: 1px solid #ccc;
+}
+
+a {
+	color: #938888;
+	text-decoration: none;
+	background-color: transparent;
+}
+
+#board-search {
+	margin-left: -15px;
+}
+
+#asd {
+    width: 301px
+
+    !important
+}
+

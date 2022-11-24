@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>main</title>
+<link rel="stylesheet" href="css/background.css">
+<link rel="stylesheet" href="css/navabar.css">
+<!-- 구글폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,300&display=swap" rel="stylesheet">
+
+<style>
+
+nav {
+   font-size: 12pt;
+   font-family: 'PT Sans', Arial, Sans-serif;
+   position: relative;
+}
+
+nav ul {
+   padding: 0;
+   margin: 0 auto;
+   width: auto;
+}
+
+nav a {
+   line-height: 50px;
+   height: 50px;
+}
+
+nav li a {
+   box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+}
+
+nav li:last-child a {
+   border-right: 0;
+}
+
+nav a#pull {
+   display: none;
+}
+
+ul {
+   margin: 0;
+   padding: 0;
+   float: right;
+   text-align: center;
+   margin-right: 68px;
+}
+
+li {
+   /*position: relative;*/
+   display: inline-block;
+}
+
+li a {
+   color: #FFFFFF;
+   text-align: center;
+   padding: 14.5px 16px;
+   text-decoration: none;
+}
+
+li a:hover {
+   /*color: #597812;*/
+   color: #FFD400;
+   font-weight: normal;
+}
+
+
+body {
+   display: block;
+   margin: 8px;
+   margin-top: 8px;
+   margin-right: 8px;
+   margin-bottom: 8px;
+   margin-left: 8px;
+}
+
+.h1 {  font-family: 'Roboto', sans-serif; 
+    color: hwb(194deg 34% 0%);
+     margin-top: 46px;
+    margin-left: 36px;;
+ }
+
+.container1 {
+    display: grid;
+    grid-template-columns: 406px 409px 407px 267px;      
+    grid-template-rows: 324px ;
+     margin-left: 274px;
+} 
+
+.container2 {
+   margin-top: -28px;
+    margin-left: 435px;
+    display: grid;
+    grid-template-columns: 496px  447px 407px;
+    grid-template-rows: 324px ;
+} 
+
+
+ div {
+       margin: 61px;
+   margin-top: 59px;
+}
+ 
+ .img1{
+    display: grid;
+    
+    grid-template-columns:  100px;   /* 가로길이 */
+    grid-template-rows: 209px ;      /* 세로길이 */
+          
+   margin-left: 133px;
+   float: left;
+   
+    grid-template-areas:
+    "header header header"
+    "main   aside  main";
+}
+   
+   header { grid-area: header; }
+   main   { grid-area: main;   }
+   aside  { grid-area: aside;  }
+
+
+
+ .tag1 {
+     display: table-cell; 
+     color: hwb(194deg 34% 0%); 
+     text-align:center;       
+     width:100%;    
+     text-decoration: none;    
+         margin: 42px;
+    }
+       
+.font1{
+    font-size: 100px;
+    width: 367px;
+    margin-left: 30px;
+    font-size: 100px; 
+    width: 367px;
+    text-decoration: none;  
+    margin-top:30px;
+}
+
+     
+       
+</style>
+</head>
+<header>
+   <ul>
+    <li><a href="memberlist" style="color: #a8ff96 ;">MemberList</a></li>
+      <li><a href="main" style="color: #03a9f4 ;">Main</a></li>
+      <li><a href="/logout" style="color: #ff5a5a">Log out</a></li>
+      <li><a href="myPage" style="color: #ffc107;">MyPage</a></li>
+   </ul>
+
+</header>
+<body>
+
+   <h1 class="h1">문제를 선택해 주세요</h1>
+   <!-- java -->
+   <div class="container1">
+      <div class="img1">
+      <a class= font1 href="Korean" style= "color: #ff3224;">국어</a>  
+      <table style= "margin-left: 22px;">
+        <tr>
+           <td><a class="tag1" href="/Korean">Normal_Quiz</a><td>
+           <td></td><td></td>
+             <td><a class="tag1" href="/KoreanTrialExam">Trial_Exam</a><td>
+        </tr>
+     </table>
+   </div>
+
+
+      
+      <div class="img1">
+      <a class= font1 href="English" style = color:#ff9800;>영어</a> 
+      <table style= "margin-left: 22px;">
+      <tr>
+           <td> <a class="tag1" href="/English">Normal_Quiz</a><td>
+           <td></td><td></td>
+             <td><a class="tag1" href="/EnglishTrialExam">Trial_Exam</a><td>
+        </tr>
+          </table>
+      </div>
+
+      <div class="img1">
+      <a class= font1 href="Math" style = color:#44c5ff;>수학</a> 
+         <table style= "margin-left: 22px;">
+      <tr>
+           <td> <a class="tag1" href="/Math">Normal_Quiz</a><td>
+           <td></td><td></td>
+             <td><a class="tag1" href="/MathTrialExam">Trial_Exam</a><td>
+        </tr>
+          </table>
+      </div>
+   </div>
+
+   <div class="container2">
+   
+      <div class="img1">   
+   <a class= font1 href="/Social" style = color:#b4ff5e;>사탐</a> 
+            <table style= "margin-left: 22px;">
+      <tr>
+           <td> <a class="tag1" href="/Social">Normal_Quiz</a><td>
+           <td></td><td></td>
+             <td><a class="tag1" href="/SocialTrialExam">Trial_Exam</a><td>
+        </tr>
+          </table>
+   
+      </div>
+
+      <div class="img1"> 
+         <a class= font1 href="/Science" style = color:#b78eff;>과탐</a> 
+         <table style= "margin-left: 22px;">
+      <tr>
+           <td> <a class="tag1" href="/Science">Normal_Quiz</a><td>
+           <td></td><td></td>
+             <td><a class="tag1" href="/SienceTrialExam">Trial_Exam</a><td>
+        </tr>
+          </table>
+      
+      </div>
+
+
+      
+      </div>
+
+
+      
+</body>
+</html>

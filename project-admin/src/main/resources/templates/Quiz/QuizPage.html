@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/background.css">
+
+<title>Code Quiz</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="120x120"
+	href="../../assets/img/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="../../assets/img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+	href="../../assets/img/favicon/favicon-16x16.png">
+<link rel="manifest" href="../../assets/img/favicon/site.webmanifest">
+<link rel="mask-icon"
+	href="../../assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Sweet Alert -->
+<link type="text/css"
+	href="../../vendor/sweetalert2/dist/sweetalert2.min.css"
+	rel="stylesheet">
+
+<!-- Notyf -->
+<link type="text/css" href="../../vendor/notyf/notyf.min.css"
+	rel="stylesheet">
+
+<!-- <!-- Volt CSS -->
+<link type="text/css" href="../../css/volt.css" rel="stylesheet">
+
+<!-- Fontawesome -->
+<script src="https://kit.fontawesome.com/36f5567c19.js"
+	crossorigin="anonymous"></script>
+
+<style type="text/css">
+textarea {
+	resize: none;
+}
+
+.textQuizAnswer {
+	outline: 0 !important;
+	border-width: 0 0 2px !important;
+	border-color: #FFF;
+}
+
+.textQuizAnswer:focus {
+	border-color: #1F2937;
+}
+
+header {
+	height: 96px;
+}
+</style>
+</head>
+<header> </header>
+<body>
+	<div class="row mx-0">
+		<div class="col"></div>
+		<div class="col-6 col-lg-6 table-responsive-sm py-4">
+			<form action="quizWrite" method="post">
+				<h1 class="pb-5 mb-0" style="color: hwb(194deg 34% 0%)">Quiz
+					Page</h1>
+				<table class="table table-flush mb-1">
+					<tr>
+						<td>
+							<div>
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<input type="text" class="w-100 textQuizAnswer"
+											placeholder="퀴즈의 제목을 적어주세요." required="required"
+											name="quizTitle">
+										<div class="mx-3"></div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<thead class="thead-dark pb-5"></thead>
+					<tbody>
+						<tr>
+							<td colspan="2"><textarea class="form-control h-25"
+									rows="10" placeholder="퀴즈의 내용을 적어주세요." required="required"
+									name="quizContents"></textarea></td>
+						</tr>
+						<tr>
+							<td>
+								<div>
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<input type="radio" id="quizAnswer1"
+												name="selectedQuizAnswer" required="required" value="1">
+											<input type="text" class="w-100 mx-3 textQuizAnswer"
+												placeholder="퀴즈의 보기를 적어주시고 정답일 경우 왼쪽 버튼을 눌러주세요."
+												required="required" name="quizAnswer1">
+											<div class="mx-3"></div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div>
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<input type="radio" id="quizAnswer2"
+												name="selectedQuizAnswer" required="required" value="2">
+											<input type="text" class="w-100 mx-3 textQuizAnswer"
+												placeholder="퀴즈의 보기를 적어주시고 정답일 경우 왼쪽 버튼을 눌러주세요."
+												required="required" name="quizAnswer2">
+											<div class="mx-3"></div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div>
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<input type="radio" id="quizAnswer3"
+												name="selectedQuizAnswer" required="required" value="3">
+											<input type="text" class="w-100 mx-3 textQuizAnswer"
+												placeholder="퀴즈의 보기를 적어주시고 정답일 경우 왼쪽 버튼을 눌러주세요."
+												required="required" name="quizAnswer3">
+											<div class="mx-3"></div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div>
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<input type="radio" id="quizAnswer4"
+												name="selectedQuizAnswer" required="required" value="4">
+											<input type="text" class="w-100 mx-3 textQuizAnswer"
+												placeholder="퀴즈의 보기를 적어주시고 정답일 경우 왼쪽 버튼을 눌러주세요."
+												required="required" name="quizAnswer4">
+											<div class="mx-3"></div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="d-flex justify-content-end">
+								<button type="submit" class="btn btn-primary"
+									style="background: #ff5722; font-weight: bolder;">추가</button>
+								<button type="submit" class="btn btn-primary"
+									style="background: #03a9f4; font-weight: bolder;">삭제</button>
+								<button type="submit" class="btn btn-primary"
+									style="background: hwb(194deg 34% 0%); font-weight: bolder;">저장</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		<div class="col"></div>
+	</div>
+	<!-- Core -->
+	<script src="../../vendor/@popperjs/core/dist/umd/popper.min.js"></script>
+	<script src="../../vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<!-- Vendor JS -->
+	<script src="../../vendor/onscreen/dist/on-screen.umd.min.js"></script>
+
+	<!-- Slider -->
+	<script src="../../vendor/nouislider/dist/nouislider.min.js"></script>
+
+	<!-- Smooth scroll -->
+	<script
+		src="../../vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+
+	<!-- Sweet Alerts 2 -->
+	<script src="../../vendor/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
+	<!-- Moment JS -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+
+	<!-- Notyf -->
+	<script src="../../vendor/notyf/notyf.min.js"></script>
+
+	<!-- Simplebar -->
+	<script src="../../vendor/simplebar/dist/simplebar.min.js"></script>
+
+	<!-- Volt JS -->
+	<script src="../../assets/js/volt.js"></script>
+
+	<script type="text/javascript">
+	   document.addEventListener("DOMContentLoaded", isTrueAnswer());
+	   
+		function checkQuizAnswer1() {
+			document.getElementById("quizAnswer1").checked = true;
+		}
+		
+		function checkQuizAnswer2() {
+			document.getElementById("quizAnswer2").checked = true;
+		}
+		
+		function checkQuizAnswer3() {
+			document.getElementById("quizAnswer3").checked = true;
+		}
+		
+		function checkQuizAnswer4() {
+			document.getElementById("quizAnswer4").checked = true;
+		}
+		
+		function toList() {
+			const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+	        });
+	        let category = params.category;
+	        let page = params.page;
+	        if(category == null || page == null) {
+	        	location.href="/quizBoard?category=0&page=1";
+	        } else {
+	        	location.href="/quizBoard?category=" + category + "&page=" + page;
+	        }
+            
+		}
+		
+		function updateQuiz() {
+			var quizForm = document.getElementById("quizForm");
+			quizForm.action = "/quizUpdateForm";
+			quizForm.submit();
+		}
+		
+		function deleteQuiz() {
+			var check = confirm("삭제하시겠습니까?");
+			if (check == true) {
+				var quizForm = document.getElementById("quizForm");
+				quizForm.action = "/quizDelete";
+				quizForm.submit();
+			}
+		}
+		
+		function submitQuiz() {
+			var quizForm = document.getElementById("quizForm");
+			if(document.getElementById("quizAnswer1").checked == true 
+					| document.getElementById("quizAnswer2").checked == true 
+					| document.getElementById("quizAnswer3").checked == true 
+					| document.getElementById("quizAnswer4").checked == true) {
+	            quizForm.action = "/quizResult";
+	            quizForm.submit();
+			}
+		}
+		
+		function isTrueAnswer() {
+            var trueAnswer = "1";
+            if("1" >= 1){
+	            document.getElementById("quizBorder" + trueAnswer).classList.add("border");
+	            document.getElementById("quizBorder" + trueAnswer).classList.add("border-success");
+	            document.getElementById("quizBorder" + trueAnswer).classList.add("rounded");
+	            document.getElementById("quizAnswer1").disabled = true;
+	            document.getElementById("quizAnswer2").disabled = true;
+	            document.getElementById("quizAnswer3").disabled = true;
+	            document.getElementById("quizAnswer4").disabled = true;
+            }
+        }
+	</script>
+</body>
+</html>

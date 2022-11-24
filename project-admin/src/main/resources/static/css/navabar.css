@@ -1,0 +1,21 @@
+@charset "EUC-KR";
+
+
+.navabar {
+		vertical-align: top; 
+		margin: 0;
+        padding: 0;
+		float: right;
+        text-align: center;
+        margin-right: 68px;
+        margin-top: 20px;
+      }
+      li{
+        /*position: relative;*/
+        display: inline-block;
+      }
+      li a{
+        text-align: center;
+        padding: 14.5px 16px;
+        text-decoration: none;
+      }

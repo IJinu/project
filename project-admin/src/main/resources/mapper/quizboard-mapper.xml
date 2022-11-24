@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.repository.mapper.QuizBoardMapper">
+    
+    <!-- 퀴즈 등록 -->
+<insert id="insertQuiz" parameterType="vo.QuizBoardVo"  useGeneratedKeys = "true" keyProperty = "quizNum">
+INSERT INTO QUIZ_BOARD(QUIZ_TITLE,QUIZ_CONTENTS,QUIZ_WRITER,QUIZ_WRITE_DATE,
+QUIZ_ANSWER1,QUIZ_ANSWER2,QUIZ_ANSWER3,QUIZ_ANSWER4,QUIZ_TRUE_ANSWER,QUIZ_TYPE,QUIZ_SOLUTION)
+VALUES(#{quizTitle},#{quizContents},#{quizWriter},now(),#{quizAnswer1},#{quizAnswer2},#{quizAnswer3},#{quizAnswer4},#{quizTrueAnswer},#{quizType},#{quizSolution})
+</insert>
+
+<!-- 유저가 틀린 퀴즈를 등록 -->
+<insert id = "insertQuizIncorrectCount" parameterType = "vo.QuizIncorrectCountVo">
+        INSERT INTO QUIZ_RESULT(ID, QUIZ_NUM, QUIZ_TITLE,QUIZ_TYPE,QUIZ_CHALLENGER) 
+        VALUES(#{id}, #{quizNum},#{quizTitle},#{quizType},#{quizChallenger})
+	</insert>
+
+	
+	<!-- 총 게시글 수 구하는 쿼리 -->
+	<select id="selectQuizTotalCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM QUIZ_BOARD
+	</select>
+
+	
+	<!-- 퀴즈 정답 확인 -->
+	<select id = "isAnswerCorrect" resultType = "int">
+        SELECT COUNT(*) 
+        FROM QUIZ_BOARD 
+        WHERE QUIZ_NUM = #{quizNum} AND QUIZ_TRUE_ANSWER = #{selectedQuizAnswer}
+	</select>
+	
+   <!-- 국어 -->
+	<select id="selectJavaCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM QUIZ_BOARD 
+		WHERE QUIZ_TYPE='국어'
+	</select>
+	<!-- 영어 -->
+  <select id="selectSqlCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM QUIZ_BOARD 
+		WHERE QUIZ_TYPE='영어'
+  </select>
+  
+   <!-- 수학 -->
+     <select id="selectCssCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM QUIZ_BOARD 
+		WHERE QUIZ_TYPE='수학'
+   </select>
+   
+    <!-- 사탐 -->
+     <select id="selectReactCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM QUIZ_BOARD 
+		WHERE QUIZ_TYPE='사탐'
+   </select>
+   
+      <!-- 과탐 -->
+     <select id="selectDockerCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM QUIZ_BOARD 
+		WHERE QUIZ_TYPE='과탐'
+   </select>
+   
+    
+   
+         <!-- 오답 -->
+     <select id="selectQuizIncorrectCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM QUIZ_RESULT 
+		WHERE ID = #{Id}
+   </select>
+   
+ 
+	<!-- 국어리스트 -->
+  <select id="selectJavaList" resultMap="quizBoardResultMap">
+		SELECT QUIZ_NUM, QUIZ_TITLE, QUIZ_WRITER, QUIZ_WRITE_DATE
+		FROM QUIZ_BOARD 
+		WHERE QUIZ_TYPE = '국어'
+		ORDER BY QUIZ_NUM DESC
+		LIMIT #{startRow}, #{count}
+	</select>
+
+  <!-- 영어리스트 -->
+    <select id="selectSqlList" resultMap="quizBoardResultMap">
+		SELECT QUIZ_NUM, QUIZ_TITLE, QUIZ_WRITER, QUIZ_WRITE_DATE
+		FROM QUIZ_BOARD 
+		WHERE QUIZ_TYPE = '영어'
+		ORDER BY QUIZ_NUM DESC
+		LIMIT #{startRow}, #{count}
+	</select>
+	<!-- 수학 -->
+	    <select id="selectCssList" resultMap="quizBoardResultMap">
+		SELECT QUIZ_NUM, QUIZ_TITLE, QUIZ_WRITER, QUIZ_WRITE_DATE
+		FROM QUIZ_BOARD 
+		WHERE QUIZ_TYPE = '수학'
+		ORDER BY QUIZ_NUM DESC
+		LIMIT #{startRow}, #{count}
+	</select>
+	
+		<!-- 사탐 -->
+	    <select id="selectReactList" resultMap="quizBoardResultMap">
+		SELECT QUIZ_NUM, QUIZ_TITLE, QUIZ_WRITER, QUIZ_WRITE_DATE
+		FROM QUIZ_BOARD 
+		WHERE QUIZ_TYPE = '사탐'
+		ORDER BY QUIZ_NUM DESC
+		LIMIT #{startRow}, #{count}
+	</select>
+ 
+ 		<!-- 과탐 -->
+	    <select id="selectDockerList" resultMap="quizBoardResultMap">
+		SELECT QUIZ_NUM, QUIZ_TITLE, QUIZ_WRITER, QUIZ_WRITE_DATE
+		FROM QUIZ_BOARD 
+		WHERE QUIZ_TYPE = '과탐'
+		ORDER BY QUIZ_NUM DESC
+		LIMIT #{startRow}, #{count}
+	</select>
+
+		<!-- 오답 -->
+	    <select id="selectQuizIncorrectList" resultMap="quizBoardResultMap">
+		SELECT *
+		FROM QUIZ_RESULT 
+		ORDER BY QUIZ_NUM DESC
+		LIMIT #{startRow}, #{count}
+	   </select>
+
+
+    <!-- 퀴즈 리딩 -->
+	<select id="selectQuiz" parameterType="int" resultMap="quizBoardResultMap">
+		SELECT * 
+		FROM QUIZ_BOARD 
+		WHERE QUIZ_NUM=#{quizNum}
+	</select>
+
+	<select id="selectQuizList" resultMap="quizBoardResultMap">
+		SELECT QUIZ_NUM, QUIZ_TITLE, QUIZ_WRITER, QUIZ_WRITE_DATE
+		FROM QUIZ_BOARD 
+		ORDER BY QUIZ_NUM DESC
+		LIMIT #{startRow}, #{count}
+	</select>
+
+	<update id = "updateQuiz" parameterType = "vo.QuizBoardVo">
+		UPDATE QUIZ_BOARD SET 
+		QUIZ_TITLE = #{quizTitle}, 
+		QUIZ_CONTENTS = #{quizContents}, 
+		QUIZ_ANSWER1 = #{quizAnswer1}, 
+		QUIZ_ANSWER2 = #{quizAnswer2}, 
+		QUIZ_ANSWER3 = #{quizAnswer3}, 
+		QUIZ_ANSWER4 = #{quizAnswer4}, 
+		QUIZ_TRUE_ANSWER = #{quizTrueAnswer}, 
+		QUIZ_WRITE_DATE = #{quizWriteDate},
+		QUIZ_TYPE = #{quizType} 
+		WHERE QUIZ_NUM = #{quizNum}
+	</update>
+
+	<!-- 특정 아이디로 특정 퀴즈를 틀린 이력확인 --> 
+	<select id = "selectQuizIncorrectHistory" resultType = "int">
+		SELECT COUNT(*) 
+		FROM QUIZ_RESULT 
+		WHERE ID = #{id} AND QUIZ_NUM = #{quizNum} 
+	</select>
+
+		<!-- 틀린 퀴즈 내역 삭제 -->   
+	<delete id = "deleteQuizIncorrectCount" parameterType = "int">
+        DELETE FROM QUIZ_RESULT 
+        WHERE QUIZ_NUM = #{quizNum}
+	</delete>
+
+
+
+	<delete id="deleteQuiz" parameterType="int">
+		DELETE FROM QUIZ_BOARD
+		WHERE QUIZ_NUM=#{quizNum}
+	</delete>
+
+	
+	<resultMap type = "vo.QuizBoardVo" id = "quizBoardResultMap">
+		<result column = "QUIZ_NUM" property = "quizNum"/>
+		<result column = "QUIZ_TITLE" property = "quizTitle"/>
+		<result column = "QUIZ_CONTENTS" property = "quizContents"/>		
+		<result column = "QUIZ_WRITER" property = "quizWriter"/>
+		<result column = "QUIZ_WRITE_DATE" property = "quizWriteDate"/>
+		<result column = "QUIZ_ANSWER1" property = "quizAnswer1"/>
+		<result column = "QUIZ_ANSWER2" property = "quizAnswer2"/>
+		<result column = "QUIZ_ANSWER3" property = "quizAnswer3"/>
+		<result column = "QUIZ_ANSWER4" property = "quizAnswer4"/>
+		<result column = "QUIZ_TRUE_ANSWER" property = "quizTrueAnswer"/>
+		<result column = "QUIZ_TYPE" property = "quizType"/>
+		<result column = "QUIZ_SOLUTION" property = "quizSolution"/>
+		<result column = "QUIZ_CHALLENGER" property = "quizChallenger"/>
+	</resultMap>
+</mapper>

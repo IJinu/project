@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/background.css">
+
+<title>1</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="120x120"
+	href="../../assets/img/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="../../assets/img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+	href="../../assets/img/favicon/favicon-16x16.png">
+<link rel="manifest" href="../../assets/img/favicon/site.webmanifest">
+<link rel="mask-icon"
+	href="../../assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Sweet Alert -->
+<link type="text/css"
+	href="../../vendor/sweetalert2/dist/sweetalert2.min.css"
+	rel="stylesheet">
+
+<!-- Notyf -->
+<link type="text/css" href="../../vendor/notyf/notyf.min.css"
+	rel="stylesheet">
+
+<!-- <!-- Volt CSS -->
+<link type="text/css" href="../../css/trlt.css" rel="stylesheet">
+
+<!-- Fontawesome -->
+<script src="https://kit.fontawesome.com/36f5567c19.js"
+	crossorigin="anonymous"></script>
+
+<style type="text/css">
+
+.py-4 {
+    padding-top: 4.5rem !important;
+    padding-bottom: 17.5rem !important;
+    margin-right: 450px;
+}
+
+textarea {
+	resize: none;
+}
+
+.textTrialAnswer {
+	outline: 0 !important;
+	border-width: 0 0 2px !important;
+	border-color: #FFF;
+}
+
+.textTrialAnswer:focus {
+	border-color: #1F2937;
+}
+
+header {
+	height: 96px;
+}
+</style>
+</head>
+<header> </header>
+<body>
+
+	<div class="row mx-0">
+		<div class="col"></div>
+		<div class="col-6 col-lg-6 table-responsive-sm py-4">
+			<form action="trialResult" method="post" id="trialForm">
+				<h1 class="pb-1 mb-0" th:text="${tr.trialTitle}" style="color: hwb(194deg 34% 0%)" ></h1>
+				<h6
+					th:text="${tr.trialType} + ' ' + ${tr.trialNum} + '번 퀴즈 | 작성자 : ' + ${tr.trialWriter}" style="color: hwb(194deg 34% 0%)" ></h6>
+						< <h6 class="text-danger" th:if="${history} >= 1" th:text="'※ 마킹 한 문제입니다.'"></h6>
+				<input type="hidden" name="trialNum" th:value="${tr.trialNum}">
+
+				<input type="hidden" name="trialTitle" th:value="${tr.trialTitle}">
+				<input type="hidden" name="trialType" th:value="${tr.trialType}">
+				<table class="table table-flush mb-1">
+					<thead class="thead-dark pb-5"></thead>
+					<tbody>
+						<tr>
+							<td colspan="2"><textarea class="form-control h-25"
+									rows="10" th:text="${tr.trialContents}" readonly="readonly"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="trialBorder1" class="">
+									<div onclick="checkTrialAnswer1()" style="cursor: pointer">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<input type="radio" id="trialAnswer1"
+													name="selectedTrialAnswer" value="1" required="required">
+												<div class="mx-3" th:text="${tr.trialAnswer1}"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="trialBorder2" class="">
+									<div onclick="checkTrialAnswer2()" style="cursor: pointer"
+										id="trialBorder2">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<input type="radio" id="trialAnswer2"
+													name="selectedTrialAnswer" value="2" required="required">
+												<div class="mx-3" th:text="${tr.trialAnswer2}"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="trialBorder3" class="">
+									<div onclick="checkTrialAnswer3()" style="cursor: pointer"
+										id="trialBorder3">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<input type="radio" id="trialAnswer3"
+													name="selectedTrialAnswer" value="3" required="required">
+												<div class="mx-3" th:text="${tr.trialAnswer3}"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="trialBorder4" class="">
+									<div onclick="checkTrialAnswer4()" style="cursor: pointer"
+										id="trialBorder4">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<input type="radio" id="trialAnswer4"
+													name="selectedTrialAnswer" value="4" required="required">
+												<div class="mx-3" th:text="${tr.trialAnswer4}"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+								<td class="d-flex justify-content-end">			
+									<div class="d-flex justify-content-end">
+									<!-- 		 -->
+	                                 <button type="button" class="btn btn-success" th:onclick="updateSocialTrial(this.form)" th:if="${session.loginId == tr.trialWriter}">수정</button>
+                                     <button type="button" class="btn btn-danger mx-2" th:onclick="deleteSocialTrial(this.form)" th:if="${session.loginId == tr.trialWriter}">삭제</button>
+									 <button type="button" class="btn btn-primary" th:onclick="submitTrial(this.form)">마킹</button>
+					
+					
+		  
+<!-- <a th:if test="${maxNumber == trialNum}">
+	<button>결과보기</button>
+</a>
+			 -->						
+	
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		</div>
+		<div class="col"></div>
+
+		<script type="text/javascript">
+	   document.addEventListener("DOMContentLoaded", isTrueAnswer());
+	   
+		function checkTrialAnswer1() {
+			document.getElementById("trialAnswer1").checked = true;
+		}
+		
+		function checkTrialAnswer2() {
+			document.getElementById("trialAnswer2").checked = true;
+		}
+		
+		function checkTrialAnswer3() {
+			document.getElementById("trialAnswer3").checked = true;
+		}
+		
+		function checkTrialAnswer4() {
+			document.getElementById("trialAnswer4").checked = true;
+		}
+		
+
+		
+		function updateSocialTrial() {
+			var trialForm = document.getElementById("trialForm");
+			trialForm.action = "/SotrialUpdateForm";
+			trialForm.submit();
+		}
+		
+		function deleteSocialTrial() {
+			var check = confirm("삭제하시겠습니까?");
+			if (check == true) {
+				var trialForm = document.getElementById("trialForm");
+				trialForm.action = "/deleteSocialTrial";
+				trialForm.submit();
+			}
+		}
+		
+		function submitTrial() {
+			var trialForm = document.getElementById("trialForm");
+			if(document.getElementById("trialAnswer1").checked == true 
+					| document.getElementById("trialAnswer2").checked == true 
+					| document.getElementById("trialAnswer3").checked == true 
+					| document.getElementById("trialAnswer4").checked == true) {
+	            trialForm.action = "/SoTrialResult";
+	            trialForm.submit();
+			}
+		}
+		
+		function isTrueAnswer() {
+            var trueAnswer = "[[${tr.trialTrueAnswer}]]";
+            if("[[${history}]]" >= 1){
+	            document.getElementById("trialBorder" + trueAnswer).classList.add("border");
+	            document.getElementById("trialBorder" + trueAnswer).classList.add("border-success");
+	            document.getElementById("trialBorder" + trueAnswer).classList.add("rounded");
+	            document.getElementById("trialAnswer1").disabled = true;
+	            document.getElementById("trialAnswer2").disabled = true;
+	            document.getElementById("trialAnswer3").disabled = true;
+	            document.getElementById("trialAnswer4").disabled = true;
+            }
+        }
+	</script>
+</body>
+</html>
