@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/background.css">
+
+<title>관리자 퀴즈 등록</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="120x120"
+	href="../../assets/img/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="../../assets/img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+	href="../../assets/img/favicon/favicon-16x16.png">
+<link rel="manifest" href="../../assets/img/favicon/site.webmanifest">
+<link rel="mask-icon"
+	href="../../assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Sweet Alert -->
+<link type="text/css"
+	href="../../vendor/sweetalert2/dist/sweetalert2.min.css"
+	rel="stylesheet">
+
+<!-- Notyf -->
+<link type="text/css" href="../../vendor/notyf/notyf.min.css"
+	rel="stylesheet">
+
+<!-- <!-- Volt CSS -->
+<link type="text/css" href="../../css/volt.css" rel="stylesheet">
+
+<!-- Fontawesome -->
+<script src="https://kit.fontawesome.com/36f5567c19.js"
+	crossorigin="anonymous"></script>
+
+<style type="text/css">
+textarea {
+	resize: none;
+}
+
+.textTrialAnswer {
+	outline: 0 !important;
+	border-width: 0 0 2px !important;
+	border-color: #FFF;
+}
+
+.textTrialAnswer:focus {
+	border-color: #1F2937;
+}
+
+header {
+	height: 96px;
+}
+</style>
+</head>
+<header></header>
+<body>
+	<div class="mostly-customized-scrollbar">
+	<div class="row mx-0">
+		<div class="col"></div>
+			<div class="col-6 col-lg-6 table-responsive-sm py-4">
+				<form action = "TrialHDWrite" method = "post">
+					<h1 class="pb-5 mb-0"  style="color: #ff3224" >국어 모의고사 만들기</h1>
+					<select id="category" class="form-control w-25" th:onchange="selectCategory(this.value)" required="required" name="trialType">
+			
+                            <option value="국어" id="모의고사">모의고사</option>
+					</select>
+					<table class="table table-flush mb-1">
+					   
+					   
+					    <tr>
+                            <td>
+					           <div>
+					               <div class="input-group-prepend">
+					                   <div class="input-group-text">
+                                           <input type="int" class="w-100 textTrialAnswer" placeholder="'1'을 입력해주세요"  name="trialX">
+					                       <div class="mx-3"></div>
+					                   </div>
+					               </div>
+					           </div>
+					       </td>
+					    </tr>
+					
+                        <tr>
+                            <td>
+					           <div>
+					               <div class="input-group-prepend">
+					                   <div class="input-group-text">
+                                           <input type="text" class="w-100 textTrialAnswer" placeholder="세트번호 와 퀴즈 제목을 적어주세요." required="required" name="trialTitle">
+					                       <div class="mx-3"></div>
+					                   </div>
+					               </div>
+					           </div>
+					       </td>
+					    </tr>
+						<thead class="thead-dark pb-5"></thead>
+						<tbody>
+							<tr>
+								<td colspan="2">
+									<textarea class="form-control h-25" rows="10" th:text="${trialContents}" placeholder="퀴즈의 내용을 적어주세요." required="required" name="trialContents"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<input type="radio" id="trialAnswer1" name="selectedTrialAnswer" required="required" value="1">
+												<input type="text" class="w-100 mx-3 textTrialAnswer" placeholder="퀴즈의 보기를 적어주시고 정답일 경우 왼쪽 버튼을 눌러주세요." required="required" name="trialAnswer1">
+												<div class="mx-3"></div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<input type="radio" id="trialAnswer2" name="selectedTrialAnswer" required="required" value="2">
+												<input type="text" class="w-100 mx-3 textTrialAnswer" placeholder="퀴즈의 보기를 적어주시고 정답일 경우 왼쪽 버튼을 눌러주세요." required="required" name="trialAnswer2">
+												<div class="mx-3"></div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<input type="radio" id="trialAnswer3" name="selectedTrialAnswer" required="required" value="3">
+												<input type="text" class="w-100 mx-3 textTrialAnswer" placeholder="퀴즈의 보기를 적어주시고 정답일 경우 왼쪽 버튼을 눌러주세요." required="required" name="trialAnswer3">
+												<div class="mx-3"></div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<input type="radio" id="trialAnswer4" name="selectedTrialAnswer" required="required" value="4">
+												<input type="text" class="w-100 mx-3 textTrialAnswer" placeholder="퀴즈의 보기를 적어주시고 정답일 경우 왼쪽 버튼을 눌러주세요." required="required" name="trialAnswer4">
+												<div class="mx-3"></div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							
+							<tr>
+								<td colspan="2">
+									<textarea class="form-control h-25" rows="10" th:text="${trialSolution}" placeholder="퀴즈의 해설을 적어주세요." required="required" name="trialSolution"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td class="d-flex justify-content-end">
+									<button type="submit" class="btn btn-primary" style="background: #03a9f4; font-weight: bolder;">문제 추가</button>
+								</td>
+							</tr> 			
+						</tbody>
+					</table>
+				</form>
+		</div>
+	<div class="col"></div>
+	</div>
+	</div>
+	
+	<script type="text/javascript">
+		function selectCategory(value) {
+			var categoryId = document.getElementById("category");
+			categoryId.value
+		}
+	</script>
+</body>
+</html>

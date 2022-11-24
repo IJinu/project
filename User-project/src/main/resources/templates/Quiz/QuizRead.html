@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/background.css">
+<link rel="stylesheet" href="css/navabar.css">
+
+<title>1</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="120x120"
+	href="../../assets/img/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="../../assets/img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+	href="../../assets/img/favicon/favicon-16x16.png">
+<link rel="manifest" href="../../assets/img/favicon/site.webmanifest">
+<link rel="mask-icon"
+	href="../../assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Sweet Alert -->
+<link type="text/css"
+	href="../../vendor/sweetalert2/dist/sweetalert2.min.css"
+	rel="stylesheet">
+
+<!-- Notyf -->
+<link type="text/css" href="../../vendor/notyf/notyf.min.css"
+	rel="stylesheet">
+
+<!-- <!-- Volt CSS -->
+<link type="text/css" href="../../css/volt.css" rel="stylesheet">
+
+<!-- Fontawesome -->
+<script src="https://kit.fontawesome.com/36f5567c19.js"
+	crossorigin="anonymous"></script>
+
+<style type="text/css">
+
+.py-4 {
+    padding-top: 4.5rem !important;
+    padding-bottom: 17.5rem !important;
+    margin-right: 450px;
+}
+
+textarea {
+	resize: none;
+}
+
+.textQuizAnswer {
+	outline: 0 !important;
+	border-width: 0 0 2px !important;
+	border-color: #FFF;
+}
+
+.textQuizAnswer:focus {
+	border-color: #1F2937;
+}
+
+header {
+	height: 96px;
+}
+</style>
+</head>
+
+<body>
+
+<ul class="navabar" style= "color: white;">
+ 	
+      <li><a href="main" style="color: #03a9f4 ;">Main</a></li>
+      <li><a href="/logout" style="color: #ff5a5a">Log out</a></li>
+      <li><a href="myPage" style="color: #ffc107;">MyPage</a></li>
+      </ul> 
+      <header> </header>
+	<div class="row mx-0">
+		<div class="col"></div>
+		<div class="col-6 col-lg-6 table-responsive-sm py-4">
+			<form action="quizResult" method="post" id="quizForm">
+				<h1 class="pb-1 mb-0" th:text="${vo.quizTitle}" style="color: hwb(194deg 34% 0%)" ></h1>
+				<h6
+					th:text="${vo.quizType} + ' ' + ${vo.quizNum} + '번 퀴즈 | 작성자 : ' + ${vo.quizWriter}" style="color: hwb(194deg 34% 0%)" ></h6>
+						<h6 class="text-danger" th:if="${history} >= 1" th:text="'※ 틀린 문제입니다.'"></h6>
+				<input type="hidden" name="quizNum" th:value="${vo.quizNum}">
+
+				<input type="hidden" name="quizTitle" th:value="${vo.quizTitle}">
+				<input type="hidden" name="quizType" th:value="${vo.quizType}">
+				<table class="table table-flush mb-1">
+					<thead class="thead-dark pb-5"></thead>
+					<tbody>
+						<tr>
+							<td colspan="2"><textarea class="form-control h-25"
+									rows="10" th:text="${vo.quizContents}" readonly="readonly"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="quizBorder1" class="">
+									<div onclick="checkQuizAnswer1()" style="cursor: pointer">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<input type="radio" id="quizAnswer1"
+													name="selectedQuizAnswer" value="1" required="required">
+												<div class="mx-3" th:text="${vo.quizAnswer1}"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="quizBorder2" class="">
+									<div onclick="checkQuizAnswer2()" style="cursor: pointer"
+										id="quizBorder2">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<input type="radio" id="quizAnswer2"
+													name="selectedQuizAnswer" value="2" required="required">
+												<div class="mx-3" th:text="${vo.quizAnswer2}"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="quizBorder3" class="">
+									<div onclick="checkQuizAnswer3()" style="cursor: pointer"
+										id="quizBorder3">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<input type="radio" id="quizAnswer3"
+													name="selectedQuizAnswer" value="3" required="required">
+												<div class="mx-3" th:text="${vo.quizAnswer3}"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="quizBorder4" class="">
+									<div onclick="checkQuizAnswer4()" style="cursor: pointer"
+										id="quizBorder4">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<input type="radio" id="quizAnswer4"
+													name="selectedQuizAnswer" value="4" required="required">
+												<div class="mx-3" th:text="${vo.quizAnswer4}"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+								<td class="d-flex justify-content-end">			
+									<div class="d-flex justify-content-end">
+									<!-- 		 -->
+									
+								   	<button type="button" th:if="${history} >= 1" class="btn btn-primary" style="background: #2196f3; font-weight: bolder;  color: white;" onclick="location.href='/myPage'">해설</button>
+									  <button type="button" th:if="${history} == 0" class="btn btn-primary" th:onclick="submitQuiz(this.form)"style="background: #2196f3;">정답 확인</button>
+									
+									
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		</div>
+		<div class="col"></div>
+
+		<script type="text/javascript">
+	   document.addEventListener("DOMContentLoaded", isTrueAnswer());
+	   
+		function checkQuizAnswer1() {
+			document.getElementById("quizAnswer1").checked = true;
+		}
+		
+		function checkQuizAnswer2() {
+			document.getElementById("quizAnswer2").checked = true;
+		}
+		
+		function checkQuizAnswer3() {
+			document.getElementById("quizAnswer3").checked = true;
+		}
+		
+		function checkQuizAnswer4() {
+			document.getElementById("quizAnswer4").checked = true;
+		}
+		
+		function toList() {
+			const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+	        });
+	        let category = params.category;
+	        let page = params.page;
+	        if(category == null || page == null) {
+	        	location.href="/quizBoard?category=0&page=1";
+	        } else {
+	        	location.href="/quizBoard?category=" + category + "&page=" + page;
+	        }
+            
+		}
+		
+		function updateQuiz() {
+			var quizForm = document.getElementById("quizForm");
+			quizForm.action = "/quizUpdateForm";
+			quizForm.submit();
+		}
+		
+		function deleteQuiz() {
+			var check = confirm("삭제하시겠습니까?");
+			if (check == true) {
+				var quizForm = document.getElementById("quizForm");
+				quizForm.action = "/quizDelete";
+				quizForm.submit();
+			}
+		}
+		
+		function submitQuiz() {
+			var quizForm = document.getElementById("quizForm");
+			if(document.getElementById("quizAnswer1").checked == true 
+					| document.getElementById("quizAnswer2").checked == true 
+					| document.getElementById("quizAnswer3").checked == true 
+					| document.getElementById("quizAnswer4").checked == true) {
+	            quizForm.action = "/QuizResult";
+	            quizForm.submit();
+			}
+		}
+		
+		function isTrueAnswer() {
+            var trueAnswer = "[[${vo.quizTrueAnswer}]]";
+            if("[[${history}]]" >= 1){
+	            document.getElementById("quizBorder" + trueAnswer).classList.add("border");
+	            document.getElementById("quizBorder" + trueAnswer).classList.add("border-success");
+	            document.getElementById("quizBorder" + trueAnswer).classList.add("rounded");
+	            document.getElementById("quizAnswer1").disabled = true;
+	            document.getElementById("quizAnswer2").disabled = true;
+	            document.getElementById("quizAnswer3").disabled = true;
+	            document.getElementById("quizAnswer4").disabled = true;
+            }
+        }
+	</script>
+</body>
+</html>

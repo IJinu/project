@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>1</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="css/background.css">
+<link rel="stylesheet" href="css/navabar.css">
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="120x120"
+	href="../../assets/img/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="../../assets/img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+	href="../../assets/img/favicon/favicon-16x16.png">
+<link rel="manifest" href="../../assets/img/favicon/site.webmanifest">
+<link rel="mask-icon"
+	href="../../assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Sweet Alert -->
+<link type="text/css"
+	href="../../vendor/sweetalert2/dist/sweetalert2.min.css"
+	rel="stylesheet">
+
+<!-- Notyf -->
+<link type="text/css" href="../../vendor/notyf/notyf.min.css"
+	rel="stylesheet">
+
+<!-- Volt CSS -->
+<link type="text/css" href="../../css/volt.css" rel="stylesheet">
+
+<!-- Fontawesome -->
+<script src="https://kit.fontawesome.com/36f5567c19.js"
+	crossorigin="anonymous"></script>
+
+<style type="text/css">
+textarea {
+	resize: none;
+}
+
+.textQuizAnswer {
+	outline: 0 !important;
+	border-width: 0 0 2px !important;
+	border-color: #FFF;
+}
+
+.textQuizAnswer:focus {
+	border-color: #1F2937;
+}
+
+header {
+	height: 96px;
+}
+</style>
+</head>
+<body>
+	<div class="mostly-customized-scrollbar">
+		<ul class="navabar" style="color: white;">
+			<li><a href="memberlist" style="color: #a8ff96;">MemberList</a></li>
+			<li><a href="main" style="color: #03a9f4;">Main</a></li>
+			<li><a href="/logout" style="color: #ff5a5a">Log out</a></li>
+			<li><a href="myPage" style="color: #ffc107;">MyPage</a></li>
+		</ul>
+		<header> </header>
+		<div class="row mx-0">
+			<div class="col"></div>
+			<div class="col-6 col-lg-6 table-responsive-sm py-4">
+				<form action="SienceTrialUpdate" method="post">
+					<h1 class="mb-0" style="color: hwb(194deg 34% 0%)">퀴즈 수정</h1>
+					<select id="category" class="form-control w-25"
+						th:onchange="selectCategory(this.value)" required="required"
+						name="trialType">
+						<option value="과탐" id="과탐 모고">과탐 모의고사</option>
+
+					</select> <input type="hidden" th:value="${tr.trialNum}" name="trialNum">
+					<table class="table table-flush mb-1">
+						<tr>
+							<td>
+								<div>
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<input type="text" class="w-100 textQuizAnswer"
+												placeholder="퀴즈의 제목을 적어주세요." th:value="${tr.trialTitle}"
+												required="required" name="trialTitle"></input>
+											<div class="mx-3"></div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<thead class="thead-dark pb-5"></thead>
+						<tbody>
+							<tr>
+								<td colspan="2"><textarea class="form-control h-25"
+										rows="10" th:text="${tr.trialContents}"
+										placeholder="퀴즈의 내용을 적어주세요." required="required"
+										name="trialContents"></textarea></td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<div class="input-group-prepend" id="trialBorder1">
+											<div class="input-group-text">
+												<input type="radio" id="trialAnswer1"
+													name="selectedQuizAnswer" disabled="disabled" value="1">
+												<input type="text" class="w-100 mx-3 textQuizAnswer"
+													placeholder="퀴즈의 보기를 적어주시고 정답일 경우 왼쪽 버튼을 눌러주세요."
+													th:value="${tr.trialAnswer1}" name="trialAnswer1"></input>
+												<div class="mx-3"></div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<div class="input-group-prepend" id="trialBorder2">
+											<div class="input-group-text">
+												<input type="radio" id="trialAnswer2"
+													name="selectedQuizAnswer" disabled="disabled" value="2">
+												<input type="text" class="w-100 mx-3 textQuizAnswer"
+													placeholder="퀴즈의 보기를 적어주시고 정답일 경우 왼쪽 버튼을 눌러주세요."
+													th:value="${tr.trialAnswer2}" name="trialAnswer2"></input>
+												<div class="mx-3"></div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<div class="input-group-prepend" id="trialBorder3">
+											<div class="input-group-text">
+												<input type="radio" id="trialAnswer3"
+													name="selectedQuizAnswer" disabled="disabled" value="3">
+												<input type="text" class="w-100 mx-3 textQuizAnswer"
+													placeholder="퀴즈의 보기를 적어주시고 정답일 경우 왼쪽 버튼을 눌러주세요."
+													th:value="${tr.trialAnswer3}" name="trialAnswer3"></input>
+												<div class="mx-3"></div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<div class="input-group-prepend" id="trialBorder4">
+											<div class="input-group-text">
+												<input type="radio" id="trialAnswer4"
+													name="selectedQuizAnswer" disabled="disabled" value="4">
+												<input type="text" class="w-100 mx-3 textQuizAnswer"
+													placeholder="퀴즈의 보기를 적어주시고 정답일 경우 왼쪽 버튼을 눌러주세요."
+													th:value="${tr.trialAnswer4}" name="trialAnswer4"></input>
+												<div class="mx-3"></div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2"><textarea class="form-control h-25"
+										rows="10" th:text="${tr.trialSolution}"
+										placeholder="퀴즈의 해설을 적어주세요." required="required"
+										name="trialSolution"></textarea></td>
+							</tr>
+							<tr>
+								<td class="d-flex justify-content-end"><input type="hidden"
+									name="trialNum" th:value="${tr.trialNum}">
+									<button type="submit" class="btn btn-primary"
+										style="background: #03a9f4; font-weight: bolder;">확인</button>
+									<input class="btn btn-danger" type="submit" value="취소"
+									style="background: red; font-weight: bolder;"></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+			<div class="col"></div>
+		</div>
+	</div>
+	<!-- Core -->
+	<script src="../../vendor/@popperjs/core/dist/umd/popper.min.js"></script>
+	<script src="../../vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<!-- Vendor JS -->
+	<script src="../../vendor/onscreen/dist/on-screen.umd.min.js"></script>
+
+	<!-- Slider -->
+	<script src="../../vendor/nouislider/dist/nouislider.min.js"></script>
+
+	<!-- Smooth scroll -->
+	<script
+		src="../../vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+
+	<!-- Sweet Alerts 2 -->
+	<script src="../../vendor/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
+	<!-- Moment JS -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+
+	<!-- Notyf -->
+	<script src="../../vendor/notyf/notyf.min.js"></script>
+
+	<!-- Simplebar -->
+	<script src="../../vendor/simplebar/dist/simplebar.min.js"></script>
+
+	<!-- Volt JS -->
+	<script src="../../assets/js/trlt.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/background.css">
+<link rel="stylesheet" href="css/navabar.css">
+
+<title>사용자 퀴즈 등록</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="120x120"
+	href="../../assets/img/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="../../assets/img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+	href="../../assets/img/favicon/favicon-16x16.png">
+<link rel="manifest" href="../../assets/img/favicon/site.webmanifest">
+<link rel="mask-icon"
+	href="../../assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Sweet Alert -->
+<link type="text/css"
+	href="../../vendor/sweetalert2/dist/sweetalert2.min.css"
+	rel="stylesheet">
+
+<!-- Notyf -->
+<link type="text/css" href="../../vendor/notyf/notyf.min.css"
+	rel="stylesheet">
+
+<!-- <!-- Volt CSS -->
+<link type="text/css" href="../../css/volt.css" rel="stylesheet">
+
+<!-- Fontawesome -->
+<script src="https://kit.fontawesome.com/36f5567c19.js"
+	crossorigin="anonymous"></script>
+
+<style type="text/css">
+textarea {
+	resize: none;
+}
+
+.textQuizAnswer {
+	outline: 0 !important;
+	border-width: 0 0 2px !important;
+	border-color: #FFF;
+}
+
+.textQuizAnswer:focus {
+	border-color: #1F2937;
+}
+
+header {
+	height: 96px;
+}
+/* form {
+
+} */
+</style>
+</head>
+
+<body>
+	<ul class="navabar" style="color: white;">
+		
+      <li><a href="main" style="color: #03a9f4 ;">Main</a></li>
+      <li><a href="/logout" style="color: #ff5a5a">Log out</a></li>
+      <li><a href="myPage" style="color: #ffc107;">MyPage</a></li>
+	</ul>
+	<header> </header>
+	<div class="mostly-customized-scrollbar">
+		<div class="row mx-0">
+			<div class="col"></div>
+			<div class="col-6 col-lg-6 table-responsive-sm py-4">
+				<form action="quizResult" method="post" id="quizForm">
+					<h1 class="pb-1 mb-0" th:text="${vo.quizTitle}"
+						style="color: hwb(194deg 34% 0%)"></h1>
+					<h6
+						th:text="${vo.quizType} + ' ' + ${vo.quizNum} + '번 퀴즈 | 작성자 : ' + ${vo.quizWriter}"
+						style="color: hwb(194deg 34% 0%)"></h6>
+					<input type="hidden" name="quizNum" th:value="${vo.quizNum}">
+
+					<input type="hidden" name="quizTitle" th:value="${vo.quizTitle}">
+					<input type="hidden" name="quizType" th:value="${vo.quizType}">
+					<table class="table table-flush mb-1">
+						<thead class="thead-dark pb-5"></thead>
+						<tbody>
+							<tr>
+								<td colspan="2"><textarea class="form-control h-25"
+										rows="10" th:text="${vo.quizContents}" readonly="readonly"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div id="quizBorder1" class="">
+										<div onclick="checkQuizAnswer1()" style="cursor: pointer">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<input type="radio" id="quizAnswer1"
+														name="selectedQuizAnswer" value="1" required="required">
+													<div class="mx-3" th:text="${vo.quizAnswer1}"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div id="quizBorder2" class="">
+										<div onclick="checkQuizAnswer2()" style="cursor: pointer"
+											id="quizBorder2">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<input type="radio" id="quizAnswer2"
+														name="selectedQuizAnswer" value="2" required="required">
+													<div class="mx-3" th:text="${vo.quizAnswer2}"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div id="quizBorder3" class="">
+										<div onclick="checkQuizAnswer3()" style="cursor: pointer"
+											id="quizBorder3">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<input type="radio" id="quizAnswer3"
+														name="selectedQuizAnswer" value="3" required="required">
+													<div class="mx-3" th:text="${vo.quizAnswer3}"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div id="quizBorder4" class="">
+										<div onclick="checkQuizAnswer4()" style="cursor: pointer"
+											id="quizBorder4">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<input type="radio" id="quizAnswer4"
+														name="selectedQuizAnswer" value="4" required="required">
+													<div class="mx-3" th:text="${vo.quizAnswer4}"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr></tr>
+
+
+							<tr>
+								<td colspan="2"
+									style="font-size: 25px; font-weight: 600; color: hwb(210deg 60% 0%)">정답
+									및 해설<textarea class="form-control h-25" rows="10"
+										th:text="${vo.quizSolution}" readonly="readonly"></textarea>
+								<tr>
+								<td class="d-flex justify-content-end">
+									<div class="d-flex justify-content-end">
+								
+										<!-- <a type="button" class="btn btn-primary"
+										th:href="@{/deleteQuiz(quizNum=${vo.quizNum})}"
+										th:if="${session.loginId == vo.quizWriter}"
+										style="background: red; font-weight: bolder;">삭제</a>
+										</div> -->
+								</td>
+							</tr>
+					</table>
+				</form>
+			</div>
+			<div class="col"></div>
+		</div>
+	</div>
+
+</body>
+</html>

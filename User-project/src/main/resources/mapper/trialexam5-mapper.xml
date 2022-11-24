@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.repository.mapper.TrialExam5Mapper">
+
+
+<!-- 유저가 틀린 퀴즈를 등록 -->
+    <insert id = "insertTrialIncorrectCount" parameterType = "vo.TrialIncorrectCount5Vo">
+      INSERT INTO TRIAL5_INCORRECT(ID, TRIAL_NUM, TRIAL_TITLE,TRIAL_TYPE,TRIAL_CHALLENGER) 
+        VALUES(#{id}, #{trialNum},#{trialTitle},#{trialType},#{trialChallenger})
+	</insert>
+	
+
+	
+    <!-- 종합문제 총 개수 -->
+     <select id="selectTrialTotalCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM TRIAL_EXAM5
+	</select>
+	
+		<select id="selectTrialCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM TRIAL_EXAM5 
+	 	WHERE TRILA_TYPE='과탐'
+	    </select>
+
+		<!-- 종합문제 리스트-->
+	    <select id="selectTrialList" resultMap="TrialExamResultMap">
+		SELECT TRIAL_NUM, TRIAL_TITLE, TRIAL_WRITER, TRIAL_WRITE_DATE
+		FROM TRIAL_EXAM5 
+		WHERE TRIAL_TYPE = '과탐'
+		ORDER BY TRIAL_NUM DESC
+		LIMIT #{startRow}, #{count}
+	 </select>
+	 
+		 	<!-- 종합헤드 리스트-->
+	    <select id="selectTrialHDList" resultMap="TrialExamResultMap">
+		SELECT TRIAL_NUM, TRIAL_TITLE, TRIAL_WRITER, TRIAL_WRITE_DATE
+		FROM TRIAL_EXAM5 
+		WHERE TRIAL_X
+		ORDER BY TRIAL_NUM DESC
+		LIMIT #{startRow}, #{count}
+	 </select>
+
+		   <!-- 종합문제 리딩R -->
+	<select id="selectTrial" parameterType="int" resultMap="TrialExamResultMap">
+		SELECT * FROM TRIAL_EXAM5  
+		WHERE TRIAL_NUM=#{trialNum}
+	</select>
+	
+			   <!-- 종합문제 리딩R -->
+	<select id="selectTrialHD" parameterType="int" resultMap="TrialExamResultMap">
+		SELECT * FROM TRIAL_EXAM5  
+		WHERE TRIAL_NUM=#{trialNum}
+	</select>
+
+		<!-- 특정 아이디로 특정 퀴즈를 틀린 이력확인 --> 
+	<select id = "selectTrialIncorrectHistory" resultType = "int">
+		SELECT COUNT(*) 
+		FROM TRIAL5_INCORRECT 
+		WHERE ID = #{id} AND TRIAL_NUM = #{trialNum} 
+	</select>
+	
+	
+	
+	<!-- U -->
+	<update id = "updateTrial" parameterType = "vo.TrialExam5Vo">
+		UPDATE TRIAL_EXAM5  SET 
+		TRIAL_TITLE = #{trialTitle}, 
+		TRIAL_CONTENTS = #{trialContents}, 
+		TRIAL_ANSWER1 = #{trialAnswer1}, 
+		TRIAL_ANSWER2 = #{trialAnswer2}, 
+		TRIAL_ANSWER3 = #{trialAnswer3}, 
+		TRIAL_ANSWER4 = #{trialAnswer4}, 
+		TRIAL_TRUE_ANSWER = #{trialTrueAnswer}, 
+		TRIAL_WRITE_DATE = #{trialWriteDate},
+		TRIAL_TYPE = #{trialType},
+		TRIAL_SOLUTION = #{trialSolution} 
+		WHERE TRIAL_NUM = #{trialNum}
+	</update>
+	
+		<!-- 퀴즈 정답 확인 -->
+	<select id = "isAnswerCorrect" resultType = "int">
+        SELECT COUNT(*) 
+        FROM TRIAL_EXAM5 
+        WHERE TRIAL_NUM = #{trialNum} AND TRIAL_TRUE_ANSWER = #{selectedTrialAnswer}
+	</select>
+	
+
+	
+    <!-- 맞춘 퀴즈 내역 삭제 -->
+	<delete id = "deleteTrialIncorrectCount" parameterType = "int">
+        DELETE FROM TRIAL5_INCORRECT
+        WHERE TRIAL_NUM = #{triaNum}
+	</delete>
+	
+	<!-- 오답 리스트-->
+	    <select id="selectTrialIncorrectList" resultMap="TrialExamResultMap">
+		SELECT *
+		FROM TRIAL5_INCORRECT 
+		ORDER BY TRIAL_NUM DESC
+		LIMIT #{startRow}, #{count}
+	   </select>
+       <!-- 최대 문제넘버-->
+		<select id= "maxPage" resultType = "int">
+		SELECT max(Trial_Num) FROM TRIAL_EXAM5
+		</select>
+
+
+
+
+
+<resultMap type = "vo.TrialExam5Vo" id = "TrialExamResultMap">
+		<result column = "TRIAL_NUM" property = "trialNum"/>
+		<result column = "TRIAL_TITLE" property = "trialTitle"/>
+		<result column = "TRIAL_CONTENTS" property = "trialContents"/>		
+		<result column = "TRIAL_WRITER" property = "trialWriter"/>
+		<result column = "TRIAL_WRITE_DATE" property = "trialWriteDate"/>
+		<result column = "TRIAL_ANSWER1" property = "trialAnswer1"/>
+		<result column = "TRIAL_ANSWER2" property = "trialAnswer2"/>
+		<result column = "TRIAL_ANSWER3" property = "trialAnswer3"/>
+		<result column = "TRIAL_ANSWER4" property = "trialAnswer4"/>
+		<result column = "TRIAL_TRUE_ANSWER" property = "trialTrueAnswer"/>
+		<result column = "TRIAL_TYPE" property = "trialType"/>
+		<result column = "TRIAL_SOLUTION" property = "trialSolution"/>
+		<result column = "TRIAL_X" property = "trialX"/>
+				<result column = "TRIAL_CHALLENGER" property = "trialChallenger"/>
+	</resultMap>
+</mapper>

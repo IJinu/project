@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원가입 화면</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+	integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="css/join.css">
+</head>
+
+
+<body>
+	<div>
+		<div class="logo">
+		
+		</div>
+		<form action="join" method="post">
+			<div class="signu">
+			
+			<div class="join">
+			<div><h3>회원가입</h3></div>
+				<table class="input-wrap" >
+					<tr>
+						<td>학번(교번):</td>
+						<td><input class="id" type="text" name="id" size="10"
+							required></td>
+					</tr>
+
+					<tr>
+						<td>패스워드:</td>
+						<td><input class="pass" type="password" name="password"
+							size="10" required></td>
+
+					</tr>
+
+					<tr>
+						<td>이름:</td>
+						<td><input class="name" type="text" name="name"></td>
+					</tr>
+
+					<tr>
+						<td>휴대폰:</td>
+						<td><input class="tel" type="tel" name="phone" style=" color: white;"
+							placeholder="'-'없이 입력하세요"></td>
+					</tr>
+
+
+					<tr>
+						<td>E-MAIL</td>
+						<td><input class="email" cols="20" type="email" name="email"
+					
+							size="10"></td>
+					</tr>
+					<tr>
+						<td>직급</td>
+						<td><input class="email" cols="20" type="text"  name="level" style=" color: white;"
+					placeholder="예) 관리자, 선생님, 학생 "
+							size="10"></td>
+					</tr>
+	<tr></tr>
+				</table>
+						<button type="submit" class="btn btn-primary btn-block btn-large"
+					style="background: #03a9f4;">작성완료</button>
+
+			</div>
+			</div>
+		</form>
+
+
+	</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>1</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="css/navabar.css">
+<link rel="stylesheet" href="css/background.css">
+ <link rel="stylesheet" href="css/board1.css"> 
+<link rel="stylesheet"
+	href="bootstrap-4.4.1-dist/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+<!-- Fontawesome -->
+<script src="https://kit.fontawesome.com/36f5567c19.js"
+	crossorigin="anonymous"></script>
+<style>
+
+/* [html, body 영역 스타일 지정] */
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	border: none;
+	overflow: auto;
+}
+
+/* [body 스크롤바 메인 스타일 지정] */
+body::-webkit-scrollbar {
+	width: 10px;
+	background-color: #c1c1c1;
+}
+/* body 스크롤바 thumb 스타일 지정 */
+body::-webkit-scrollbar-thumb {
+	background-color: #444444;
+}
+
+.page-title h3 {
+	margin-top: 138px;
+	margin-bottom: 110px;
+	font-size: 50px;
+	color: white;
+	font-weight: bold /*    text-align center; */
+}
+
+.container {
+	width: 1353px;
+	margin-top: 129px;
+	
+}
+
+.board-table {
+	font-size: 16px;
+	height: 277px;
+	background: white;
+	box-sizing: border-box;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 15px;
+	overflow: auto;
+	display: inline-block;
+	text-align: center;
+}
+
+.board-table th, .board-table td {
+	padding: 14px 0;
+	width: 464px;
+}
+
+
+.page {
+	font-weight: bold;
+	font-size: 20px;
+	color: white;
+}
+
+.btn1 {
+	width: -27px;
+	height: 33px;
+	border-radius: 6px;
+	padding: 5px;
+	font-weight: normal;
+	margin-top:-22px;
+	float: right;
+	border: none;
+	font-size: 0.875rem;
+}
+
+nav {
+	margin-top: 5px;
+}
+
+.page-item.active .page-link {
+	z-index: 3;
+	color: #fff;
+	background-color: #fff;
+	border-color: #ccc;;
+	border: 1px solid #ccc;
+}
+
+a {
+	color: #938888;
+	text-decoration: none;
+	background-color: transparent;
+}
+
+#board-search {
+	margin-left: -15px;
+}
+
+#asd {
+	width: 511px;
+}
+</style>
+
+</head>
+<body>
+<ul class="navabar" style= "color: white;">
+      <li><a href="main" style="color: #03a9f4 ;">Main</a></li>
+      <li><a href="/logout" style="color: #ff5a5a">Log out</a></li>
+      <li><a href="myPage" style="color: #ffc107;">MyPage</a></li>
+      </ul> 
+	<header>
+		<div class="page-title">
+			<div class="container">
+				<h3 style="color: #ff9800;">영어 단일 문제</h3>
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		<!-- board seach area -->
+		<div id="board-search">
+			<div class="container">
+				<div class="search-window">
+					<form action="">
+						<div class="search-wrap">
+							<!-- <label for="search" class="blind"></label>  -->
+							<input id="search" type="search" name=""
+								placeholder="검색어를 입력해주세요." value="">
+							<button type="submit" class="btn btn-dark">검색</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+          
+         	<table class="board-table">
+			<thead>
+				<tr>
+					<th scope="col" class="th-num">번호</th>
+					<th id="asd" scope="col">제목</th>
+					<th scope="col" class="th-title">작성자</th>
+					<th scope="col" class="th-date">작성일</th>
+
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr></tr>
+				<tr th:if="${!#lists.isEmpty(quizPage.boardList)}"  
+				 th:each="QuizBoardVo : ${quizPage.boardList}">
+					<td th:text="${QuizBoardVo.quizNum}"></td>
+					<td class="w-50"><a
+						th:href="@{/quizRead(quizNum=${QuizBoardVo.quizNum})}"   
+						th:text="${QuizBoardVo.quizTitle}"></a></td>
+					<td><a th:text="${QuizBoardVo.quizWriter}"></a></td>
+					<td
+						th:text="${#dates.format(QuizBoardVo.quizWriteDate, 'yyyy-MM-dd')}"></td>
+				<tr>
+			</tbody>
+		</table>
+
+
+		<nav aria-label="...">
+			<ul class="pagination pagination-sm">
+				<!-- <li class="page-item active" aria-current="page"
+					th:each="p : ${#numbers.sequence(quizPage.startPage,quizPage.endPage)}">
+					<span class="page-link"><a th:text="${p}" th:href="@{/English(page=${p})}"></a></span>
+				</li> -->
+			
+			</ul>
+		</nav>
+		<!-- <a><button type="button" class="btn1" 
+				th:onclick="location.href='/quizWriteForm2'" style="background: #03a9f4; color: #fff;">글 쓰기</button></a>  -->
+
+
+	</div>
+
+	<script type="text/javascript">
+	    document.addEventListener("DOMContentLoaded", activePage());
+	    
+		function category(value) {
+			var categoryId = document.getElementById("category");
+			location.href="/quizBoard?category=" + categoryId.value + "&page=1";
+		}
+		
+		function activePage() {
+			const params = new Proxy(new URLSearchParams(window.location.search), {
+				  get: (searchParams, prop) => searchParams.get(prop),
+			});
+			let value = params.page;
+		    document.getElementById("page_" + value).classList.add("active");
+		}
+		
+    	
+    	/* [html 최초 로드 및 이벤트 상시 대기 실시] */
+    	window.onload = function() {
+    		console.log("");
+    		console.log("[window onload] : [start]");
+    		console.log(""); 
+
+    		// 동적으로 테이블 tbody tr 행 생성 실시
+    		tableInsert();
+    	};
+		
+
+    
+    	
+    	
+	</script>
+
+</body>
+</html>

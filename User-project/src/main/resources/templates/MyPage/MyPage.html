@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head profile="http://www.w3.org/2005/10/profile">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/background.css">
+<link rel="stylesheet" href="css/navabar.css">
+<title>마이 페이지</title>
+<style type="text/css">
+.page-title h3 {
+	margin-top: 21px;
+	margin-bottom: 110px;
+	font-size: 50px;
+	color: white;
+	font-weight: bold;
+	margin-left: 70px;
+}
+
+body {
+	background-color: #7B5097;
+}
+
+.login-form {
+	background-color: #FFFFFF;
+	width: 703px;
+	height: 547px;
+	margin: 186px auto;
+	border: 1px solid gray;
+	border-radius: 5px;
+	padding: 15px;
+}
+
+.container1 {
+	display: grid;
+	grid-template-columns: 214px 221px 193px;
+	grid-template-rows: 98px 27px;
+	margin-left: -60px;
+	margin-top: 65px;
+}
+
+/* .navabar{
+margin-top:-218px;
+} */
+#img {
+	width: 100px;
+	height: 88px;
+	margin-top: 10px;
+	margin-bottom: -53px;
+}
+
+.font1 {
+	width: 367px;
+	font-size: 20px;
+	width: 367px;
+	text-decoration: none;
+	font-weight: bold;
+	text-align: center;
+}
+
+ .tag1 {
+     display: table-cell; 
+     color: hwb(194deg 34% 0%); 
+     text-align:center;       
+     width:100%;    
+     text-decoration: none;    
+	 margin: 42px;
+    }
+
+.board{
+  text-align:center;     
+  font-weight: bold;  
+  font-size: 20px;	
+}
+
+</style>
+</head>
+
+<body>
+
+	<ul class="navabar" style="color: white;">
+	
+      <li><a href="main" style="color: #03a9f4 ;">Main</a></li>
+      <li><a href="/logout" style="color: #ff5a5a">Log out</a></li>
+      <li><a href="myPage" style="color: #ffc107;">MyPage</a></li>
+	</ul>
+	<header>
+		<div class="page-title">
+			<div class="container">
+				<h3 style="color: hwb(194deg 34% 0%)">MyPage</h3>
+			</div>
+		</div>
+
+
+	</header>
+
+
+	<form class="login-form " method="post">
+
+		<h3>
+			<a th:text="${session.loginId}"></a>님의 오답 노트
+		</h3>
+		<div align="center">
+			<img id="img" onclick="toggleImg()" src="log/member.png" />
+		</div>
+		<br>
+		<div align="right">
+			<a type="button" onclick="location.href='logout';" style="font-weight: bold;">Log out</a><br>
+			
+		</div>
+		<div  class = board style="width: 100%;margin-top: 26px;">오답 리스트</div>
+
+		<div class="container1">
+			<a class=font1 href="/NormalQuizIncorrect"> 개별 문제 <br>오답</a>
+			 <a	class=font1 href="/KoreanIncorrectIncorrect" style="color: #ff3224;"> 국어 모의고사 <br>오답</a> 
+				<a class=font1 href="/EnglishIncorrectIncorrect" style="color: #ff9800;"> 영어 모의고사 <br>오답</a> 
+				<a class=font1	href="/MathIncorrectIncorrect" style="color: #44c5ff;"> 수학 모의고사 <br> 오답</a> 
+				<a class=font1 href="/SocialIncorrectIncorrect" style="color: #a6e55d;"> 사탐 모의고사 <br> 오답</a> 
+				<a class=font1 href="/SienceIncorrectIncorrect" style="color: #b78eff;"> 과탐	모의고사 <br> 오답</a>
+		</div>
+	</form>
+	<script>
+
+</script>
+</body>
+</html>
